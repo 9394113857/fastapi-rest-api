@@ -1,6 +1,10 @@
+from pathlib import Path
+
 from fastapi import FastAPI
 from fastapi.responses import FileResponse
-from pathlib import Path
+from fastapi.staticfiles import StaticFiles
+
+from app.api.routes.mobiles import router as mobile_router
 
 app = FastAPI(
     title="FastAPI REST API",
@@ -8,6 +12,15 @@ app = FastAPI(
 )
 
 BASE_DIR = Path(__file__).resolve().parent
+
+app.mount(
+    "/static",
+    StaticFiles(directory=BASE_DIR / "static"),
+    name="static",
+)
+
+
+app.include_router(mobile_router)
 
 
 @app.get("/")

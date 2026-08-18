@@ -27,3 +27,5 @@ Get-ChildItem app -Recurse -Filter "__init__.py"
 uvicorn app.main:app --reload --port 5000
 
 
+
+
