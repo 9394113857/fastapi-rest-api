@@ -1,3 +1,6 @@
+# ▶️ Start the server:
+uvicorn app.main:app --reload --port 5000
+
 # 📋 Get All Mobiles:
 Invoke-RestMethod -Uri "http://127.0.0.1:5000/mobiles/" -Method Get
 
