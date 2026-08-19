@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 from fastapi import FastAPI
@@ -18,9 +19,20 @@ app = FastAPI(
 # CORS - Allow Angular frontend
 # ============================================================
 
+cors_origins = os.getenv(
+    "CORS_ORIGINS",
+    "http://localhost:4200",
+)
+
+allow_origins = [
+    origin.strip()
+    for origin in cors_origins.split(",")
+    if origin.strip()
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:4200"],
+    allow_origins=allow_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
